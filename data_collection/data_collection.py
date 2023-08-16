@@ -6,6 +6,9 @@ import time
 import pandas as pd
 from bs4 import BeautifulSoup
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
 days = ['Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 website = 'http://webapps.daff.gov.za/amis/amis_price_search.jsp'
 
