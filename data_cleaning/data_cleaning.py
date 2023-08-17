@@ -27,24 +27,35 @@ def clean_dataset(name):
         # Drop rows which have NOT GRADED class
         df = df[df["Class"] != "NOT GRADED"]
 
+        # Drop rows which have NO SIZE
+        df = df[df["Size"] != "NO SIZE"]
+
+        # Drop rows which do not have certain variety
+        df = df[~df['Variety'].str.contains('OTHER')]
+
         # Categorical data type of columns
         df["Variety"] = df["Variety"].astype("category")
-        df["Variety_labeled"] = pd.factorize(df["Variety"])[0]
+        df["variety_labeled"] = pd.factorize(df["Variety"])[0]
 
         df["Class"] = df["Class"].astype("category")
-        df["Class_labeled"] = pd.factorize(df["Class"])[0]
+        df["class_labeled"] = pd.factorize(df["Class"])[0]
 
         df["Size"] = df["Size"].astype("category")
-        df["Size_labeled"] = pd.factorize(df["Size"])[0]
+        df["size_labeled"] = pd.factorize(df["Size"])[0]
 
         df["Package"] = df["Package"].astype("category")
-        df["Package_labeled"] = pd.factorize(df["Package"])[0]
+        df["package_labeled"] = pd.factorize(df["Package"])[0]
 
         df["Market"] = df["Market"].astype("category")
-        df["Market_labeled"] = pd.factorize(df["Market"])[0]
+        df["market_labeled"] = pd.factorize(df["Market"])[0]
 
         # Drop Product column
         df.drop("Product", axis=1, inplace=True)
+
+        # Price per kg
+        df['kg_price'] = df['Price'] / df['Unit']
+        df['kg_price'] = df['kg_price'].round(decimals=2)
+
 
         print(df.info())
 
