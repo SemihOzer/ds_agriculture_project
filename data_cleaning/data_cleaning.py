@@ -35,19 +35,10 @@ def clean_dataset(name):
 
         # Categorical data type of columns
         df["Variety"] = df["Variety"].astype("category")
-        df["variety_labeled"] = pd.factorize(df["Variety"])[0]
-
         df["Class"] = df["Class"].astype("category")
-        df["class_labeled"] = pd.factorize(df["Class"])[0]
-
         df["Size"] = df["Size"].astype("category")
-        df["size_labeled"] = pd.factorize(df["Size"])[0]
-
         df["Package"] = df["Package"].astype("category")
-        df["package_labeled"] = pd.factorize(df["Package"])[0]
-
         df["Market"] = df["Market"].astype("category")
-        df["market_labeled"] = pd.factorize(df["Market"])[0]
 
         # Drop Product column
         df.drop("Product", axis=1, inplace=True)
@@ -63,7 +54,7 @@ def clean_dataset(name):
     except:
         print(f"Could not find dataset which is name {name}")
 
-clean_dataset('BANANAS')
+clean_dataset('APPLES')
 
 
 
