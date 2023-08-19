@@ -15,3 +15,21 @@
 * Market columns are renamed.
 
 * Variety, Class, Size, Package and Market columns are converted to category data type.
+
+## Model Building
+
+* Choosing relevant columns.
+
+* Getting dummy data
+
+* Splitting train test data
+
+* Multiple Linear Regression
+
+* Lasso Regression
+
+* Random Forest
+
+* Tune models using GridSearchCV
+
+* Test ensembles
