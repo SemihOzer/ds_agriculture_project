@@ -67,29 +67,51 @@ print(df_err[df_err.error == max(df_err.error)]) # alpha = 0.19 error = -2.64746
 # Random forest
 from sklearn.ensemble import RandomForestRegressor
 
-rf = RandomForestRegressor()
+rf = RandomForestRegressor(criterion='friedman_mse', max_features=None, n_estimators=40)
+rf.fit(X_train,y_train)
 
 # print(np.mean(cross_val_score(rf,X_train,y_train,scoring="neg_mean_absolute_error",cv=10)))
 
 # Tune models using GridSearchCV
 from sklearn.model_selection import GridSearchCV
 
-parameters = parameters = {'n_estimators': range(10, 200    , 10), 'criterion': ('absolute_error', 'friedman_mse'),
-                           'max_features': (None, 'sqrt', 'log2', 0.5)}
+parameters = {'n_estimators': range(10, 50, 10), 'criterion': ('absolute_error', 'friedman_mse'),
+              'max_features': (None, 'sqrt', 'log2', 0.5)}
 
-gs = GridSearchCV(rf, parameters, scoring='neg_mean_absolute_error', cv=3, error_score='raise')
-gs.fit(X_train, y_train)
+# gs = GridSearchCV(rf, parameters, scoring='neg_mean_absolute_error', cv=3, error_score='raise')
+# gs.fit(X_train, y_train)
 
-print(f"Best Score: f{gs.best_score_}")
-print(f"Best Estimator: f{gs.best_estimator_}")
+# print(f"Best Score: f{gs.best_score_}")
+# print(f"Best Estimator: f{gs.best_estimator_}")
+"""
+printed
+Best Score: f-0.5265265753873192
+Best Estimator: fRandomForestRegressor(criterion='friedman_mse', max_features=None,
+                      n_estimators=40)
+"""
 
 # Test ensembles
 tpred_lm = lm.predict(X_test)
 tpred_lml = lm_l.predict(X_test)
-tpred_rf = gs.best_estimator_.predict(X_test)
+tpred_rf = rf.predict(X_test)
 
 from sklearn.metrics import mean_absolute_error
 
 print(mean_absolute_error(y_test, tpred_lm))
 print(mean_absolute_error(y_test, tpred_lml))
 print(mean_absolute_error(y_test, tpred_rf))
+
+import pickle
+pick1 = {'model': rf}
+pickle.dump(pick1,open('model_file' + ".p","wb"))
+
+file_name = "model_file.p"
+with open(file_name,"rb") as pickled:
+    data = pickle.load(pickled)
+    model_p = data['model']
+
+print(model_p.predict(X_test.iloc[0,:].values.reshape(1,-1)))
+print(y_test)
+
+#print(list(X_test.iloc[0,:]))
+
