@@ -67,7 +67,7 @@ print(df_err[df_err.error == max(df_err.error)]) # alpha = 0.19 error = -2.64746
 # Random forest
 from sklearn.ensemble import RandomForestRegressor
 
-rf = RandomForestRegressor(criterion='friedman_mse', max_features=None, n_estimators=40)
+rf = RandomForestRegressor(criterion='absolute_error', max_features=None, n_estimators=40)
 rf.fit(X_train,y_train)
 
 # print(np.mean(cross_val_score(rf,X_train,y_train,scoring="neg_mean_absolute_error",cv=10)))
@@ -85,8 +85,8 @@ parameters = {'n_estimators': range(10, 50, 10), 'criterion': ('absolute_error',
 # print(f"Best Estimator: f{gs.best_estimator_}")
 """
 printed
-Best Score: f-0.5265265753873192
-Best Estimator: fRandomForestRegressor(criterion='friedman_mse', max_features=None,
+Best Score: f-0.46680505018820606
+Best Estimator: fRandomForestRegressor(criterion='absolute_error', max_features=None,
                       n_estimators=40)
 """
 
