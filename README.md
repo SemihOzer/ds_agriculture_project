@@ -6,3 +6,30 @@
 
 * You can use data collection script for any product you want.
 
+## Data Cleaning
+
+* Dropped rows that have missing values.
+
+* Price, Total Sales and Unit columns are converted to int data type.
+
+* Market columns are renamed.
+
+* Variety, Class, Size, Package and Market columns are converted to category data type.
+
+## Model Building
+
+* Choosing relevant columns.
+
+* Getting dummy data
+
+* Splitting train test data
+
+* Multiple Linear Regression
+
+* Lasso Regression
+
+* Random Forest
+
+* Tune models using GridSearchCV
+
+* Test ensembles
